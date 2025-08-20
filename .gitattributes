@@ -1,0 +1,4 @@
+# 核心配置
+* text=auto
+*.sh text eol=lf
+*.bat text eol=crlf
