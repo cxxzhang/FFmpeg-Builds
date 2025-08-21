@@ -51,7 +51,6 @@ docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "$PWD/ffbuild":/ffbuild -v "$BUIL
 if [[ -n "$FFBUILD_OUTPUT_DIR" ]]; then
     mkdir -p "$FFBUILD_OUTPUT_DIR"
     package_variant ffbuild/prefix "$FFBUILD_OUTPUT_DIR"
-    rm -rf ffbuild
     exit 0
 fi
 
@@ -74,7 +73,6 @@ else
 fi
 cd -
 
-rm -rf ffbuild
 
 if [[ -n "$GITHUB_ACTIONS" ]]; then
     echo "build_name=${BUILD_NAME}" >> "$GITHUB_OUTPUT"
