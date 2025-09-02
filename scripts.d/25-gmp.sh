@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_REPO="https://github.com/BtbN/gmplib.git"
+SCRIPT_REPO="https://github.com/cxxzhang/gmplib.git"
 SCRIPT_COMMIT="93d21e8f22191b48396743389e4ba9b0037f8e94"
 
 ffbuild_enabled() {
