@@ -44,7 +44,7 @@ ffbuild_dockerbuild() {
             --prefix="$COMPILER_SYSROOT"
             --host="$FFBUILD_TOOLCHAIN"
             --with-default-win32-winnt="0x601"
-            --with-default-msvcrt=ucrt
+            --with-default-msvcrt=msvcrt
             --enable-idl
             --enable-sdk=all
             --enable-secure-api
@@ -66,7 +66,7 @@ ffbuild_dockerbuild() {
         local myconf=(
             --prefix="$COMPILER_SYSROOT"
             --host="$FFBUILD_TOOLCHAIN"
-            --with-default-msvcrt=ucrt
+            --with-default-msvcrt=msvcrt
             --enable-wildcard
         )
 
