@@ -1,0 +1,45 @@
+From 66f35563762709459053ff44eccadd7086d610df Mon Sep 17 00:00:00 2001
+From: zhangshuangjun <zhangshuangjun@leagsoft.com>
+Date: Tue, 2 Sep 2025 13:59:10 +0800
+Subject: [PATCH] fix: fix build error in mingw mode.
+
+---
+ library/ssl_client.c       | 6 +++---
+ library/ssl_tls12_server.c | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/library/ssl_client.c b/library/ssl_client.c
+index 0bd00cd91a..909e667d22 100644
+--- a/library/ssl_client.c
++++ b/library/ssl_client.c
+@@ -721,9 +721,9 @@ static int ssl_generate_random(mbedtls_ssl_context *ssl)
+         MBEDTLS_PUT_UINT32_BE(gmt_unix_time, randbytes, 0);
+         gmt_unix_time_len = 4;
+ 
+-        MBEDTLS_SSL_DEBUG_MSG(3,
+-                              ("client hello, current time: %" MBEDTLS_PRINTF_LONGLONG,
+-                               (long long) gmt_unix_time));
++        //MBEDTLS_SSL_DEBUG_MSG(3,
++        //                      ("client hello, current time: %" MBEDTLS_PRINTF_LONGLONG,
++        //                       (long long) gmt_unix_time));
+ #endif /* MBEDTLS_HAVE_TIME */
+     }
+ 
+diff --git a/library/ssl_tls12_server.c b/library/ssl_tls12_server.c
+index 2d73855ee1..a76ccf07da 100644
+--- a/library/ssl_tls12_server.c
++++ b/library/ssl_tls12_server.c
+@@ -2179,8 +2179,8 @@ static int ssl_write_server_hello(mbedtls_ssl_context *ssl)
+     MBEDTLS_PUT_UINT32_BE(t, p, 0);
+     p += 4;
+ 
+-    MBEDTLS_SSL_DEBUG_MSG(3, ("server hello, current time: %" MBEDTLS_PRINTF_LONGLONG,
+-                              (long long) t));
++    //MBEDTLS_SSL_DEBUG_MSG(3, ("server hello, current time: %" MBEDTLS_PRINTF_LONGLONG,
++    //                          (long long) t));
+ #else
+     if ((ret = ssl->conf->f_rng(ssl->conf->p_rng, p, 4)) != 0) {
+         return ret;
+-- 
+2.39.2.windows.1
+

@@ -13,10 +13,22 @@ ffbuild_dockerdl() {
     echo "git submodule update --init --recursive --depth=1"
 }
 
+
+ffbuild_dockerstage() {
+    to_df "RUN --mount=src=${SELF},dst=/stage.sh --mount=src=${SELFCACHE},dst=/cache.tar.xz --mount=src=patches/mbedtls,dst=/patches run_stage /stage.sh"
+}
+
+
 ffbuild_dockerbuild() {
     if [[ $TARGET == win32 ]]; then
         python3 scripts/config.py unset MBEDTLS_AESNI_C
     fi
+
+    for patch in /patches/*.patch; do
+        echo "Applying $patch"
+        git am < "$patch"
+    done
+
 
     mkdir build && cd build
 
